@@ -10,7 +10,25 @@ Creación, puesta en marcha y coordinación de hilos.
 
 1. Revise el programa “primos concurrentes” (en la carpeta parte1), dispuesto en el paquete edu.eci.arsw.primefinder. Este es un programa que calcula los números primos entre dos intervalos, distribuyendo la búsqueda de los mismos entre hilos independientes. Por ahora, tiene un único hilo de ejecución que busca los primos entre 0 y 30.000.000. Ejecútelo, abra el administrador de procesos del sistema operativo, y verifique cuantos núcleos son usados por el mismo.
 
+- Antes, utilizacion 8%, Velocidad 3.04GZ, Procesos 238 e hilos 2623
+
+![image](https://user-images.githubusercontent.com/98216838/185148654-96a5f15e-3896-4654-8a7a-db55e950c073.png)
+
+- En ejecucion, utilizacion 55 Velocidad 3.59GZ, Procesos 244 e hilos 2807, vemos que todos los indicadores aumentan 
+
+![image](https://user-images.githubusercontent.com/98216838/185149086-2d0f8329-e6cd-4b1b-9287-0966d4a27362.png)
+
 2. Modifique el programa para que, en lugar de resolver el problema con un solo hilo, lo haga con tres, donde cada uno de éstos hará la tarcera parte del problema original. Verifique nuevamente el funcionamiento, y nuevamente revise el uso de los núcleos del equipo.
+
+![image](https://user-images.githubusercontent.com/98216838/185149786-89f07dde-dc09-46d5-80a2-567a0edcfe87.png)
+
+- Antes, Utilizacion 9%, Velocidad 3.05GZ, Procesos 245 e hilos 2805
+
+![image](https://user-images.githubusercontent.com/98216838/185149944-33fba490-a58c-4f43-ae17-9b11620bdbb4.png)
+
+- Con la nueva implementacion, Utilizacion 64%, Velocidad 3.56GZ, Procesos 247 e hilos 2791, se puede ver como la utilizacion de la cpu aumenta aun mas con 3hilos
+
+![image](https://user-images.githubusercontent.com/98216838/185151384-7f9f5d0f-9c6f-4fdf-828f-37f3a88b5f07.png)
 
 3. Lo que se le ha pedido es: debe modificar la aplicación de manera que cuando hayan transcurrido 5 segundos desde que se inició la ejecución, se detengan todos los hilos y se muestre el número de primos encontrados hasta el momento. Luego, se debe esperar a que el usuario presione ENTER para reanudar la ejecución de los mismo.
 
