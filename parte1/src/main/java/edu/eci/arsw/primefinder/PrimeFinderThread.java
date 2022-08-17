@@ -19,15 +19,6 @@ public class PrimeFinderThread extends Thread{
 		this.a = a;
 		this.b = b;
 	}
-	public void keyPressed(KeyEvent e) {
-		synchronized(primes) {
-		 if (KeyEvent.VK_ENTER==e.getKeyCode())
-        {	
-			 primes.notify();
-		  }
-		}
-	}
-	
 	public void run(){
 		inicio = System.currentTimeMillis();
 		fin = System.currentTimeMillis();
@@ -44,6 +35,7 @@ public class PrimeFinderThread extends Thread{
 					countP=primes.size();
 					System.out.println("El numero de primos encontrado es "+countP);
 					try {
+						System.out.println("Presione Enter Para Continuar");
 						primes.wait();
 					} catch (InterruptedException e) {
 					}
@@ -65,6 +57,12 @@ public class PrimeFinderThread extends Thread{
 	public List<Integer> getPrimes() {
 		return primes;
 	}
-	
+	public void restaurar() {
+		synchronized(primes) {
+			primes.notify();
+			inicio = System.currentTimeMillis();
+			fin = System.currentTimeMillis();
+		}
+	}
 	
 }

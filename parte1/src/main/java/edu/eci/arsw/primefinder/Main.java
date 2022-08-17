@@ -1,5 +1,7 @@
 package edu.eci.arsw.primefinder;
 
+import java.util.Scanner;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -10,8 +12,14 @@ public class Main {
 		pft.start();
 		pft1.start();
 		pft2.start();
-		
-		
+		String a= ".";
+		while(!a.equals("")) {
+			Scanner in = new Scanner(System.in);
+			a= in.nextLine();
+		}
+		pft.restaurar();
+		pft1.restaurar();
+		pft2.restaurar();
 	}
 	
 }
