@@ -1,12 +1,16 @@
 package edu.eci.arsw.primefinder;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
 
 public class PrimeFinderThread extends Thread{
 
 	
-	int a,b;
+	private int a,b, countP;
+	private final static int seconds = 5000;
+	public static long inicio, fin;
 	
 	private List<Integer> primes=new LinkedList<Integer>();
 	
@@ -15,15 +19,37 @@ public class PrimeFinderThread extends Thread{
 		this.a = a;
 		this.b = b;
 	}
-
+	public void keyPressed(KeyEvent e) {
+		synchronized(primes) {
+		 if (KeyEvent.VK_ENTER==e.getKeyCode())
+        {	
+			 primes.notify();
+		  }
+		}
+	}
+	
 	public void run(){
-		for (int i=a;i<=b;i++){						
-			if (isPrime(i)){
-				primes.add(i);
-				System.out.println(i);
+		inicio = System.currentTimeMillis();
+		fin = System.currentTimeMillis();
+		synchronized(primes) {
+			for (int i=a;i<=b;i++){
+				if (fin-inicio<=seconds) {
+					if (isPrime(i)){
+						primes.add(i);
+						System.out.println(i);
+						fin = System.currentTimeMillis();
+					}
+				}
+				else {
+					countP=primes.size();
+					System.out.println("El numero de primos encontrado es "+countP);
+					try {
+						primes.wait();
+					} catch (InterruptedException e) {
+					}
+				}
 			}
 		}
-		
 		
 	}
 	
@@ -39,8 +65,6 @@ public class PrimeFinderThread extends Thread{
 	public List<Integer> getPrimes() {
 		return primes;
 	}
-	
-	
 	
 	
 }
