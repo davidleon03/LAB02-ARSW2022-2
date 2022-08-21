@@ -10,7 +10,8 @@ public class PrimeFinderThread extends Thread{
 	
 	private int a,b, countP;
 	private final static int seconds = 5000;
-	public static long inicio, fin;
+	public static long inicio, fin, time;
+	public boolean pause=true;
 	
 	private List<Integer> primes=new LinkedList<Integer>();
 	
@@ -24,7 +25,13 @@ public class PrimeFinderThread extends Thread{
 		fin = System.currentTimeMillis();
 		synchronized(primes) {
 			for (int i=a;i<=b;i++){
-				if (fin-inicio<=seconds) {
+				if(pause) {
+					time= fin-inicio;
+				}
+				else {
+					time=0;
+				}
+				if (time<=seconds) {
 					if (isPrime(i)){
 						primes.add(i);
 						System.out.println(i);
@@ -59,9 +66,8 @@ public class PrimeFinderThread extends Thread{
 	}
 	public void restaurar() {
 		synchronized(primes) {
+			pause=false;
 			primes.notify();
-			inicio = System.currentTimeMillis();
-			fin = System.currentTimeMillis();
 		}
 	}
 	
